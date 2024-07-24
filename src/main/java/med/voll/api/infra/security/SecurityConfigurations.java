@@ -34,6 +34,7 @@ public class SecurityConfigurations {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Le indicamos a spring el tipo de sesion
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll() //quiero que permitir todos los request que sean post y vengan de /login
+                .requestMatchers( "/swagger-ui.html", "v3/api-docs/**", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated() //todos las demas que se autentiquen
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) //le decimos que antes pase por nuestro filtro y dsp de la coma es como que valida que el usuario que esta iniciando la sesion existe y esta autenticado
                 .build();
